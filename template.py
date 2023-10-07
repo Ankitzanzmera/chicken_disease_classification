@@ -21,7 +21,7 @@ list_of_file = [
     "dvc.yaml",
     "params.yaml",
     "requirements.txt",
-    "setup.py"
+    "setup.py",
 ]
 
 for filepath in list_of_file:
