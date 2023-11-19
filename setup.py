@@ -21,8 +21,6 @@ setup(
     author_email= "22msrds052@jainuniversity.ac.in",
     description = "A small project that classfies the disease of chicken",
     packages = find_packages(where="src"),
-    package_dir= {"","src"},
-    install_requires = get_requirements("requirements.txt"),
-    url = "https://github.com/Ankitzanzmera/chicken_disease_classification"
-
+    package_dir={"": "src"},
+    url = "https://github.com/Ankitzanzmera/chicken_disease_classification",
 )

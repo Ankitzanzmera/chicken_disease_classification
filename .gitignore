@@ -9,6 +9,7 @@ __pycache__/
 # personal
 notes/
 data/
+logs/
 
 # Distribution / packaging
 .Python
