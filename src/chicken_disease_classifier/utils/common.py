@@ -11,7 +11,7 @@ from typing import Any
 import base64
 
 @ensure_annotations
-def read_yaml(path_to_yaml: Path)-> ConfigBox:
+def read_yaml(path_to_yaml: Path) -> ConfigBox:
     """ 
         reads YAML file and returns
 
@@ -32,7 +32,7 @@ def read_yaml(path_to_yaml: Path)-> ConfigBox:
 
 
 @ensure_annotations
-def create_directories(path_to_directories:list,verbose = True):
+def create_directories(path_to_directories: list ,verbose = True):
     """
         Create List of Directories 
     
@@ -42,7 +42,7 @@ def create_directories(path_to_directories:list,verbose = True):
     """
 
     for path in path_to_directories:
-        os.makedirs(path_to_directories,exist_ok=True)
+        os.makedirs(path,exist_ok=True)
 
         if verbose:
             logger.info(f'Created Directory at : {path}')
