@@ -1,7 +1,8 @@
 from chicken_disease_classifier.constants import *
 from chicken_disease_classifier.utils.common import read_yaml,create_directories
 from chicken_disease_classifier.entity.config_entity import (DataIngestionConfig,
-                                                            PrepareBaseModelConfig)
+                                                            PrepareBaseModelConfig,
+                                                            PrepareCallbacksConfig)
 
 class ConfigurationManager:
     def __init__(self,config_filepath = CONFIG_FILE_PATH,params_filepath = PARAMS_FILE_PATH):
@@ -38,3 +39,16 @@ class ConfigurationManager:
         )
 
         return prepare_base_model_config 
+    
+    def get_prepare_callbacks_config(self) -> PrepareCallbacksConfig:
+        config = self.config.prepare_callbacks
+
+        create_directories([Path(config.root_dir),Path(config.tensorboard_root_log_dir),Path(os.path.dirname(config.checkpoint_model_filepath))])
+
+        preprare_callback_config = PrepareCallbacksConfig(
+            root_dir= config.root_dir,
+            tensorboard_root_log_dir= config.tensorboard_root_log_dir,
+            checkpoint_model_filepath= config.checkpoint_model_filepath
+        )
+
+        return  preprare_callback_config
