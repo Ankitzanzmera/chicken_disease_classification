@@ -3,7 +3,8 @@ from chicken_disease_classifier.utils.common import read_yaml,create_directories
 from chicken_disease_classifier.entity.config_entity import (DataIngestionConfig,
                                                             PrepareBaseModelConfig,
                                                             PrepareCallbacksConfig,
-                                                            ModelTrainingConfig)
+                                                            ModelTrainingConfig,
+                                                            ModelEvaluationConfig)
 import os
 
 class ConfigurationManager:
@@ -73,3 +74,14 @@ class ConfigurationManager:
             params_image_size= params.IMAGE_SIZE
         )
         return model_training_config    
+    
+    def get_validation_config(self) -> ModelEvaluationConfig:
+        evaluation_config = ModelEvaluationConfig(
+            path_of_model= Path(self.config.training.trained_model_path),
+            training_data= Path(os.path.join(self.config.data_ingestion.unzip_dir,"Chicken-fecal-images")),
+            all_params=self.params,
+            params_image_size= self.params.IMAGE_SIZE,
+            params_batch_size= self.params.BATCH_SIZE
+            
+        )
+        return evaluation_config

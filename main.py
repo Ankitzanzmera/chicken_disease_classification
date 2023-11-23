@@ -2,6 +2,7 @@ from chicken_disease_classifier import logger
 from chicken_disease_classifier.pipeline.stage_01_data_ingestion import DataIngestionTrainingPipeline
 from chicken_disease_classifier.pipeline.stage_02_prepare_base_model import PrepareBaseModelPipeline
 from chicken_disease_classifier.pipeline.stage_03_model_training import ModelTrainingPipeline
+from chicken_disease_classifier.pipeline.stage_04_model_evaluation import ModelEvaluationPipeline
 
 STAGE_NAME = "Data Ingestion"
 try:
@@ -33,4 +34,15 @@ try:
         
 except Exception as e:
     raise e
+
+STAGE_NAME = "Model Evaluation"
+if __name__ == "__main__":
+    try:
+        logger.info(f">>>>>>>>>>>>>>>>>> Stage {STAGE_NAME} Started <<<<<<<<<<<<<<<<<<<<<<")
+        obj = ModelEvaluationPipeline()
+        obj.main()
+        logger.info(f">>>>>>>>>>>>>>>>>> Stage {STAGE_NAME} Completed <<<<<<<<<<<<<<<<<<<<<<\n\nXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
+        
+    except Exception as e:
+        raise e
 
