@@ -2,7 +2,9 @@ from chicken_disease_classifier.constants import *
 from chicken_disease_classifier.utils.common import read_yaml,create_directories
 from chicken_disease_classifier.entity.config_entity import (DataIngestionConfig,
                                                             PrepareBaseModelConfig,
-                                                            PrepareCallbacksConfig)
+                                                            PrepareCallbacksConfig,
+                                                            ModelTrainingConfig)
+import os
 
 class ConfigurationManager:
     def __init__(self,config_filepath = CONFIG_FILE_PATH,params_filepath = PARAMS_FILE_PATH):
@@ -52,3 +54,22 @@ class ConfigurationManager:
         )
 
         return  preprare_callback_config
+
+
+    def get_model_training_config(self) -> ModelTrainingConfig:
+        training_config = self.config.training
+        prepare_base_model = self.config.prepare_base_model
+        params = self.params
+        training_data = os.path.join(self.config.data_ingestion.unzip_dir,"Chicken-fecal-images")
+
+        model_training_config = ModelTrainingConfig(
+            root_dir= Path(training_config.root_dir),
+            trained_model_path= Path(training_config.trained_model_path),
+            updated_base_model_path= Path(prepare_base_model.updated_base_model_path),
+            training_data= Path(training_data),
+            params_epochs= params.EPOCHS,
+            params_batch_size= params.BATCH_SIZE,
+            params_is_augmentation= params.AUGMENTATION,
+            params_image_size= params.IMAGE_SIZE
+        )
+        return model_training_config    
